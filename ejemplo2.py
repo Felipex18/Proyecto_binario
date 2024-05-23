@@ -23,15 +23,15 @@ def binario_a_texto(binario):
     texto = bytes_texto.decode('utf-8')
     return texto
 
-# Función que permite hacer el conteo de una letra en especial
+# Función que permite hacer el conteo de una letra en especial usando búsqueda binaria
 
 # Esta función toma un texto como entrada y convierte todas las letras
 # a minúsculas para un conteo uniforme. Luego cuenta la cantidad de
-# apariciones de cada letra y almacena estos conteos en un diccionario.
-# Solicita al usuario una letra para buscar y muestra cuántas veces 
-# aparece esa letra en el texto.
+# apariciones de cada letra y almacena estos conteos en una lista de tuplas
+# ordenada. Solicita al usuario una letra para buscar y muestra cuántas veces 
+# aparece esa letra en el texto utilizando búsqueda binaria.
 def contar_letras(texto):
-    texto = texto.lower() 
+    texto = texto.lower()
     contador = {}
     for letra in texto:
         if letra in contador:
@@ -39,9 +39,25 @@ def contar_letras(texto):
         else:
             contador[letra] = 1
     
+    lista_contador = sorted(contador.items())
+
+    def busqueda_binaria(lista, objetivo):
+        inicio = 0
+        fin = len(lista) - 1
+        while inicio <= fin:
+            medio = (inicio + fin) // 2
+            if lista[medio][0] == objetivo:
+                return medio
+            elif lista[medio][0] < objetivo:
+                inicio = medio + 1
+            else:
+                fin = medio - 1
+        return -1
+
     letra_a_buscar = input("Ingrese la letra a buscar: ").lower()
-    if letra_a_buscar in contador:
-        print(f"La letra '{letra_a_buscar}' aparece {contador[letra_a_buscar]} veces en el texto.")
+    indice = busqueda_binaria(lista_contador, letra_a_buscar)
+    if indice != -1:
+        print(f"La letra '{letra_a_buscar}' aparece {lista_contador[indice][1]} veces en el texto.")
     else:
         print(f"La letra '{letra_a_buscar}' no se encuentra en el texto.")
 
