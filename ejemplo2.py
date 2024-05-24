@@ -110,8 +110,8 @@ def submenu(texto):
         elif opcion == '2':
             break
         elif opcion == '3':
-            print("Saliendo del programa...")
-            exit()
+            print("Regresando al menú principal...")
+            menu_principal()
         else:
             print("Opción no válida, intente de nuevo.")
 
