@@ -86,9 +86,9 @@ def menu_principal():
             texto_recuperado = binario_a_texto(binario)
             print("Texto recuperado:", texto_recuperado)
             submenu(texto_recuperado)
-        elif opcion == '3':
+       elif opcion == '3':
             print("Saliendo del programa...")
-            break
+            exit()
         else:
             print("Opción no válida, intente de nuevo.")
 
